@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import s from '../User/User.module.scss';
-import UserButton from '../UserButton/UserButton';
 
 const User = () => {
   const [users, setUsers] = useState([]);
