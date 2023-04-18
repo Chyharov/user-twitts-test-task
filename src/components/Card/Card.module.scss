@@ -1,0 +1,24 @@
+@import '../../sass/utils/mixin';
+
+.card {
+    width: 380px;
+    display: flex;
+    color: var(--primaryTextColor);
+    background-color: var(--backgroundColor);
+    margin: 0 auto;
+    border-radius: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+
+  @include mq(tab) {
+    color: var(--primaryTextColor);
+    background-color: var(--backgroundColor);
+  }
+
+  @include mq(desk) {
+    color: var(--primaryTextColor);
+    background-color: var(--backgroundColor);
+  }
+}
+
