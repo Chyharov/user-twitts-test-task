@@ -1,0 +1,24 @@
+Clone the repository with the help of the command:
+git clone https://github.com/Chyharov/user-twitts-test-task
+
+Install fallows by typing the command:
+npm install
+
+Run the project by typing the command:
+npm run start
+
+Enter http://localhost:3000 to view the project in the browser.
+Description
+This project visors the React library and displays a list of korists with the ability to subscribe to their updates. Koristuvachs have the status of "Following" because they subscribed to the user, that "Follow" because they are not subscribed yet.
+
+This project also wins localStorage to save "Following" and "Followers" between sessions.
+
+Technologies used
+React
+Sass
+MockAPI
+Help and support
+If you have any questions or problems using this project, please contact me at Chyharov@gmail.com.
+
+Author
+This project was created by Chyharov Oleksii
