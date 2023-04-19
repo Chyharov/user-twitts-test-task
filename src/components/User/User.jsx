@@ -11,9 +11,17 @@ const User = () => {
   const [followers, setFollowers] = useState(() => {
     const followersFromStorage = localStorage.getItem('followers');
     if (followersFromStorage) {
-      return parseInt(followersFromStorage);
+      return JSON.parse(followersFromStorage);
     }
-    return 0;
+    return {};
+  });
+
+  const [following, setFollowing] = useState(() => {
+    const followingFromStorage = localStorage.getItem('following');
+    if (followingFromStorage) {
+      return JSON.parse(followingFromStorage);
+    }
+    return {};
   });
 
   useEffect(() => {
@@ -30,17 +38,18 @@ const User = () => {
       const updatedFollowers = { ...followers };
       updatedFollowers[id] = !updatedFollowers[id];
       localStorage.setItem('followers', JSON.stringify(updatedFollowers));
+
+      // update following state based on updated followers
+      setFollowing(following => {
+        const updatedFollowing = { ...following };
+        updatedFollowing[id] = updatedFollowers[id] ? 'Following' : 'Follow';
+        localStorage.setItem('following', JSON.stringify(updatedFollowing));
+        return updatedFollowing;
+      });
+
       return updatedFollowers;
     });
   };
-
-  const [following, setFollowing] = useState(() => {
-    const followingFromStorage = localStorage.getItem('following');
-    if (followingFromStorage) {
-      return JSON.parse(followingFromStorage);
-    }
-    return {};
-  });
 
   useEffect(() => {
     localStorage.setItem('following', JSON.stringify(following));
@@ -55,24 +64,18 @@ const User = () => {
       {users.length ? (
         users.map(user => (
           <div key={user.id}>
-
             <div className={s.boaderCenter}></div>
-
             <div className={s.userEclips}>
               <img className={s.userAvatar} src={user.avatar} alt={user.user} />
             </div>
-
             <div className={s.userInfoList}>
-
               <p className={s.userTweets}>Tweets: {user.tweets}</p>
-
               <p className={s.userFollowers}>Followers: {user.followers + (followers[user.id] ? 1 : 0)}</p>
-
-
-                <button className={s.FollowBtn} onClick={() => handleFollowClick(user.id)} style={{
-                  backgroundColor: followers[user.id] ? '#5CD3A8' : '#EBD8FF'}}>
-                  {followers[user.id] ? 'Following' : 'Follow'}
-                </button>
+              <button className={s.FollowBtn} onClick={() => handleFollowClick(user.id)} style={{
+                backgroundColor: followers[user.id] ? '#5CD3A8' : '#EBD8FF'
+              }}>
+                {following[user.id] || 'Follow'}
+              </button>
 
             </div>
           </div>
